@@ -1,4 +1,4 @@
-const shayariList = [
+let shayariList = [
   "Kabhi kabhi khamoshi bhi cheekh kar sab kuch keh jaati hai,\nBas sunne wala chahiye jo alfaazon ke bina bhi samajh sake.",
 
   "Waqt ne sikhaya hai ke har apna hamesha apna nahi hota,\nAur jo paraye lagte hain, wahi mushkil waqt mein saath dete hain.",
@@ -58,14 +58,22 @@ shayariEl.innerText = shayariList[randomIndex];
 shayariEl.style.animation = "";
 
 
-// Enable color on first touch / click
-let colorEnabled = false;
+// Enable color on
 
 function enableColor() {
-  if (colorEnabled) return;
   document.body.classList.add('color-on');
-  colorEnabled = true;
 }
 
-document.addEventListener('click', enableColor, { once: true });
-document.addEventListener('touchstart', enableColor, { once: true });
+function disableColor() {
+  document.body.classList.remove('color-on');
+}
+
+// Mobile (touch)
+document.addEventListener('touchstart', enableColor);
+document.addEventListener('touchend', disableColor);
+document.addEventListener('touchcancel', disableColor);
+
+// Desktop (mouse)
+document.addEventListener('mousedown', enableColor);
+document.addEventListener('mouseup', disableColor);
+document.addEventListener('mouseleave', disableColor);
