@@ -8,7 +8,7 @@ body{
   height:100vh;
   background:
     linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
-    url("me.jpg") center/cover no-repeat;
+    url("IMG_20260129_202517.jpg") center/cover no-repeat;
 }
 .logo{
   position:fixed;
