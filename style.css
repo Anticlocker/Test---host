@@ -23,7 +23,7 @@ body::before{
   inset: 0;
   background:
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("IMG_20260129_202517.jpg") center / cover no-repeat;
+    url("motion_photo_5857150418775971723.jpg") center / cover no-repeat;
   filter: grayscale(100%);
   transition: filter 0.8s ease;
   z-index: -1; /* keep behind content */
