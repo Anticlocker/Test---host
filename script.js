@@ -540,11 +540,16 @@ class MusicPlayer {
 
     toggleMusicPlayer() {
         const player = document.getElementById('music-player');
+        player.classList.toggle('active');
         player.classList.toggle('show');
     }
 
     closeMusicPlayer() {
-        document.getElementById('music-player').classList.remove('show');
+        const player = document.getElementById('music-player');
+        player.classList.remove('active');
+        player.classList.remove('show');
+        // Stop music when closing
+        this.pauseMusic();
     }
 
     loadSong(index) {
