@@ -341,7 +341,7 @@ class PetalAnimation {
 class MusicPlayer {
     constructor() {
         this.audio = document.getElementById('bg-music');
-        this.toggleBtn = document.getElementById('music-toggle');
+        this.toggleBtn = document.querySelector('.floating-music-btn') || document.getElementById('music-toggle');
         this.isPlaying = false;
         this.currentSongIndex = 0;
         this.songs = this.createPlaylist();
@@ -422,9 +422,9 @@ class MusicPlayer {
 
     createMusicFolder() {
         // Show Bollywood music info
-        console.log('🎵 Bollywood Romantic Music Player Initialized');
-        console.log('🌟 Trending Bollywood Songs for Engagement');
-        console.log('📋 Available songs:');
+        console.log('');
+        console.log('');
+        console.log('');
         this.songs.forEach((song, index) => {
             console.log(`${index + 1}. ${song.title} - ${song.artist}`);
         });
@@ -435,7 +435,7 @@ class MusicPlayer {
         const musicPlayerHTML = `
             <div class="music-player" id="music-player">
                 <div class="player-header">
-                    <h3>🎵 Romantic Playlist</h3>
+                    <h3></h3>
                     <button class="close-player" id="close-player">×</button>
                 </div>
                 <div class="now-playing">
@@ -443,7 +443,7 @@ class MusicPlayer {
                         <div class="song-title" id="song-title">Add music files to assets/music/</div>
                         <div class="song-artist" id="song-artist">Instructions below</div>
                     </div>
-                    <div class="album-art">💕</div>
+                    <div class="album-art">❤️</div>
                 </div>
                 <div class="player-controls">
                     <button class="control-btn" id="prev-btn">⏮</button>
@@ -465,11 +465,11 @@ class MusicPlayer {
                     <div class="playlist" id="playlist"></div>
                 </div>
                 <div class="music-instructions">
-                    <h4>🎵 Bollywood Romantic Songs</h4>
-                    <p>🌟 Trending Bollywood hits perfect for engagement</p>
-                    <p>💕 All-time romantic classics</p>
-                    <p>🎬 Latest movie songs</p>
-                    <p>� Perfect for Divya and Sumit's celebration</p>
+                    <h4></h4>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
         `;
@@ -502,7 +502,9 @@ class MusicPlayer {
 
     setupEventListeners() {
         // Music toggle button
-        this.toggleBtn.addEventListener('click', () => this.toggleMusicPlayer());
+        if (this.toggleBtn) {
+            this.toggleBtn.addEventListener('click', () => this.toggleMusicPlayer());
+        }
         
         // Player controls
         document.getElementById('close-player').addEventListener('click', () => this.closeMusicPlayer());
@@ -1106,10 +1108,17 @@ document.addEventListener('DOMContentLoaded', () => {
     new ThemeManager();
     new CountdownTimer();
     new PetalAnimation();
-    new MusicPlayer();
+    window.musicPlayer = new MusicPlayer();
     new GalleryFilter();
     new MobileInteractions();
     window.modalHandler = new ModalHandler();
+
+    // Backward compatible global toggle for inline onclick
+    window.toggleMusicPlayer = function toggleMusicPlayer() {
+        if (window.musicPlayer && typeof window.musicPlayer.toggleMusicPlayer === 'function') {
+            window.musicPlayer.toggleMusicPlayer();
+        }
+    };
     
     // Add smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
